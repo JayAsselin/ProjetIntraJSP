@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div layout:fragment="content">
+    <h1>Error Page</h1>
+    <p>Application has encountered an error. Please contact support on ...</p>
+
+    <p>Status code: <span th:text="${status}"></span> </p>
+    <p>Failed URL: <span th:text="${url}"></span></p>
+    <p>Exception: <span th:text="${exception.message}"></span></p>
+<!--    <div th:each="ex : ${exception.stacktrace}">-->
+<!--        <p th:text="${ex}"></p>-->
+<!--    </div>-->
+
+
+</div>
+</html>
