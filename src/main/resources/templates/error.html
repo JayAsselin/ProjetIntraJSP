@@ -3,8 +3,9 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <div layout:fragment="content">
-    <h1>Error Page</h1>
-    <p>Application has encountered an error. Please contact support on ...</p>
+    <h1> Page d’erreur</h1>
+    <h2>Attention, une erreur s’est produite dans la ressource demandée. Veuillez contacter le support
+        technique. </h2>
 
     <p>Status code: <span th:text="${status}"></span> </p>
     <p>Message d'erreur: <span th:text="${error}"></span></p>

@@ -22,11 +22,11 @@ public class LibrairieDataContext {
         listeFactures.add(facture);
     }
 
-    public void ajouterDetailFacture(DetailFacture detailFacture){
+    public void ajouterDetailFacture(DetailFacture detailFacture) {
         listeDetailFactures.add(detailFacture);
     }
 
     private int getNextNumFacture() {
-        return listeFactures.size()+1;
+        return listeFactures.size() + 1;
     }
 }
