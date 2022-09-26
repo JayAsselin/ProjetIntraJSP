@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div layout:fragment="content">
+    <h1 class="text-center mt-5 mb-5">Info sur le livre</h1>
+<div class="d-flex align-items-center justify-content-center">
+    <img th:src="${livre.photo}" alt="">
+    <div class="ms-5">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header h3 text-center">Cours resume</div>
+            <div class="card-body">
+                <p class="card-text" th:text="${livre.resume}">Some text</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</html>
