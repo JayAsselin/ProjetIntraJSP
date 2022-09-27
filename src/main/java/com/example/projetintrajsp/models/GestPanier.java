@@ -4,17 +4,18 @@ import javax.servlet.http.HttpSession;
 
 public class GestPanier {
 
-    private static Panier panier;
-
     public static Panier getPanier(HttpSession session) {
+        Panier panier;
             if(session.getAttribute("panier") != null) {
                 panier = (Panier) session.getAttribute("panier");
+            }
+            else {
+                panier = new Panier();
             }
             return panier;
     }
 
-    public static void setPanier(Panier panier, HttpSession session) {
-            panier = new Panier();
+    public static void setPanier(HttpSession session, Panier panier) {
             session.setAttribute("panier", panier);
     }
 }

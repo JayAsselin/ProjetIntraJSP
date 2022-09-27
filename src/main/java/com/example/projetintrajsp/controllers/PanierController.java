@@ -17,7 +17,6 @@ public class PanierController {
 
     private static LibrairieDataContext dataContext;
     private static GestPanier gestPanier;
-    private Panier panier;
 
     public PanierController() {
         dataContext = new LibrairieDataContext();
@@ -29,16 +28,17 @@ public class PanierController {
         return new ModelAndView("views/afficherPanier");
     }
 
-    @GetMapping("/panier/supprimerLivres/{isbn}")
+    @GetMapping("/panier/supprimer/{isbn}")
     public String supprimerLivres(HttpSession session, @PathVariable String isbn) {
-        panier = gestPanier.getPanier(session);
+        Panier panier = gestPanier.getPanier(session);
         panier.supprimer(isbn);
-        this.gestPanier.setPanier(panier, session);
+        this.gestPanier.setPanier(session, panier);
         return "redirect:/panier";
     }
 
     @GetMapping("/paiement")
-    public ModelAndView paiement(){
+    public ModelAndView paiement(Model model){
+        model.addAttribute("facture", new Facture());
         return new ModelAndView("views/paiement");
     }
 

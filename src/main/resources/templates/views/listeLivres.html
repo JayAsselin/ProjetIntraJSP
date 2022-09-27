@@ -3,7 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <div layout:fragment="content">
-    <h1 class="text-center mb-5 mt-5">Liste de livres</h1>
+    <div class="text-center mb-5 mt-5">
+        <h1>Liste de livres</h1>
+        <a href="/panier">Voir mon panier</a>
+    </div>
 <table class="table table-responsive text-center">
     <thead>
         <tr>
@@ -21,9 +24,11 @@
         <td th:text="${livre.auteur}"></td>
         <td th:text="${livre.titre}"></td>
         <td th:text="${livre.prix}"></td>
-        <td><a th:href="@{/listeLivres/infoLivre/{isbn}(isbn=${livre.isbn})}">
+        <td><a th:href="@{/listeLivres/info/{isbn}(isbn=${livre.isbn})}">
             <span class="bi bi-file-text h3"></span></a></td>
-        <td><a th:href="@{/listeLivres/acheter/{isbn}(isbn=${livre.isbn})}"><span class="bi bi-cart-plus h3"></span></a>
+        <td><a
+                th:href="@{/listeLivres/acheter/{isbn}(isbn=${livre.isbn})}"><span
+                class="bi bi-cart-plus h3"></span></a>
         </td>
     </tr>
     </tbody>

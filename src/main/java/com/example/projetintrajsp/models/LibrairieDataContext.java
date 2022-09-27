@@ -84,6 +84,9 @@ public class LibrairieDataContext {
         listeDetailFactures.add(detailFacture);
     }
 
+    public Livre findLivre(String isbn) {
+        return this.getAllLivres().stream().filter(l -> l.getIsbn().equals(isbn)).findFirst().get();
+    }
     private int getNextNumFacture() {
         return listeFactures.size() + 1;
     }

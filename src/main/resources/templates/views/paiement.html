@@ -3,6 +3,44 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <div layout:fragment="content">
-
+<div>
+    <form class="row g-3 w-50 center" th:action="@{/paiement}"
+          th:object="${facture}" method="post">
+        <div class="col-md-6">
+            <label for="numFacture" class="form-label">Numero facture</label>
+            <input type="text" class="form-control" id="numFacture" th:field="*{numFacture}">
+            <span th:if="${#fields.hasErrors('numFacture')}" th:errors="*{numFacture}"
+                  class="formErrors"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="nom" class="form-label">Nom complet</label>
+            <input type="text" class="form-control" id="nom" th:field="*{nomClient}">
+            <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nomClient}"
+                  class="formErrors"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="tel" class="form-label">Telephone</label>
+            <input type="text" class="form-control" id="tel" th:field="*{telephone}">
+            <span th:if="${#fields.hasErrors('tel')}" th:errors="*{telephone}"
+                  class="formErrors"></span>
+        </div>
+        <div class="col-md-3">
+            <label for="adresse" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="adresse" th:field="*{adresse}">
+            <span th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}"
+                  class="formErrors"></span>
+        </div>
+        <div class="col-md-3">
+            <label for="courriel" class="form-label">Courriel</label>
+            <input type="text" class="form-control" id="courriel" th:field="*{email}">
+            <span th:if="${#fields.hasErrors('courriel')}" th:errors="*{email}"
+                  class="formErrors"></span>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="reset" class="btn btn-secondary">Annuler</button>
+        </div>
+    </form>
+</div>
 </div>
 </html>
