@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div layout:fragment="content">
+    <div class="text-center mt-5 mb-5">
+        <h1>Formulaire d'ajout de livre</h1>
+        <a class="btn btn-info me-5" href="/adminPanel">Tableau de bord</a>
+        <a class="btn btn-danger ms-5" href="/adminPanel/logout">Deconnection</a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form class="row g-3 w-50" th:action="@{/adminPanel/ajouterLivre}"
+              th:object="${newLivre}" method="post">
+            <div class="col-md-6">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" class="form-control" id="isbn" th:field="*{isbn}">
+                <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="auteur" class="form-label">Auteur</label>
+                <input type="text" class="form-control" id="auteur" th:field="*{auteur}">
+                <span th:if="${#fields.hasErrors('auteur')}" th:errors="*{auteur}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="titre" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="titre" th:field="*{titre}">
+                <span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-md-3">
+                <label for="prix" class="form-label">Prix</label>
+                <input type="text" class="form-control" id="prix" th:field="*{prix}">
+                <span th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-md-3">
+                <label for="qte" class="form-label">Quantite</label>
+                <input type="text" class="form-control" id="qte" th:field="*{quantite}">
+                <span th:if="${#fields.hasErrors('quantite')}" th:errors="*{quantite}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-12">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="text" class="form-control" id="photo" th:field="*{photo}">
+                <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-12">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" class="form-control" th:field="*{resume}"></textarea>
+                <span th:if="${#fields.hasErrors('resume')}" th:errors="*{resume}"
+                      class="formErrors"></span>
+            </div>
+            <div class="col-12 text-center g-5 ">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="reset" class="btn btn-secondary">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

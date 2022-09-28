@@ -9,13 +9,14 @@ import javax.validation.constraints.*;
 @Setter
 public class Facture {
     private int numFacture;
-    @Pattern(regexp = "^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$", message = "Le numero de " +
+    @Pattern(regexp = "^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$", message = "Le numéro de " +
             "telephone doit etre sous le format (XXX) XXX-XXXX")
     private String telephone;
-    @NotEmpty(message = "Le nom ne peut pas etre vide")
+    @Pattern(regexp = "^[A-zÉéèÈ\\-\\s]{2,40}$",message = "Le nom doit contenir entre 2 et 40 " +
+            "charactères alphabétique.")
     private String nomClient;
-    @Pattern(regexp = "^\\d{1,4}\\s([A-z]+\\s?)+$", message = "L'adresse doit etre sous le " +
-            "ex: 31 rue Dubuc")
+    @Pattern(regexp = "^\\d{1,4}\\s([A-z]+\\s?)+$", message = "L'adresse doit etre sous le format" +
+            " ex: 31 rue Dubuc")
     private String adresse;
     @Email(message = "Le courriel doit etre valide")
     private String email;

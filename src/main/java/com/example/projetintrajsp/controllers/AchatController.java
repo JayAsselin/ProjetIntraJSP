@@ -19,12 +19,23 @@ public class AchatController {
         dataContext = new LibrairieDataContext();
     }
 
+    /**
+     * Affiche la liste de livre a acheter
+     * @param session en cour
+     * @return listeLivres.html
+     */
     @GetMapping("/listeLivres")
     public ModelAndView listeLivres(HttpSession session) {
         panier = GestPanier.getPanier(session);
         return new ModelAndView("views/listeLivres", "listeLivres", dataContext.getAllLivres());
     }
 
+    /**
+     * Ajoute un livre au panier a l'aide de l'isbn
+     * @param isbn du livre passer dans l'url
+     * @param session en cour
+     * @return redirection ver listeLivres.html
+     */
     @GetMapping("/listeLivres/acheter/{isbn}")
     public String acheterLivres(@PathVariable String isbn, HttpSession session){
         panier = GestPanier.getPanier(session);
@@ -35,10 +46,14 @@ public class AchatController {
         return "redirect:/listeLivres";
     }
 
+    /**
+     * Affiche la vue infoLivre pour voir le resume du livre
+     * @param isbn du livre passer dans l'url
+     * @return infoLivre.html
+     */
     @GetMapping("/listeLivres/info/{isbn}")
-    public String showBook(@PathVariable String isbn, Model model){
+    public ModelAndView showBook(@PathVariable String isbn){
         Livre livre = dataContext.findLivre(isbn);
-        model.addAttribute("livre", livre);
-        return "views/infoLivre";
+        return new ModelAndView("views/infoLivre", "livre", livre);
     }
 }

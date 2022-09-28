@@ -27,10 +27,19 @@ public class Panier {
         liste.clear();
     }
 
+    /**
+     * Passe a travers la liste pour trouver si l'isbn est present ou non
+     * @param isbn passer en parametre
+     * @return true ou false
+     */
     public boolean isPresent(String isbn) {
         return liste.stream().anyMatch(i->i.getIsbn().equals(isbn));
     }
 
+    /**
+     * Passe a travers de la liste et fait la somme du prix de tout les livres
+     * @return somme des prix
+     */
     public double getTotalCost() {
        return liste.stream().mapToDouble(LivreAchete::getPrix).sum();
     }
