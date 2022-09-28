@@ -13,28 +13,25 @@ import javax.servlet.http.HttpSession;
 public class AchatController {
 
     private static LibrairieDataContext dataContext;
-    private static GestPanier gestPanier;
     private Panier panier;
 
     public AchatController() {
         dataContext = new LibrairieDataContext();
-        gestPanier = new GestPanier();
-        panier = new Panier();
     }
 
     @GetMapping("/listeLivres")
     public ModelAndView listeLivres(HttpSession session) {
-        panier = gestPanier.getPanier(session);
+        panier = GestPanier.getPanier(session);
         return new ModelAndView("views/listeLivres", "listeLivres", dataContext.getAllLivres());
     }
 
     @GetMapping("/listeLivres/acheter/{isbn}")
     public String acheterLivres(@PathVariable String isbn, HttpSession session){
-        panier = gestPanier.getPanier(session);
+        panier = GestPanier.getPanier(session);
         Livre livre = dataContext.findLivre(isbn);
         LivreAchete livreAcheter = new LivreAchete(livre.getIsbn(), livre.getTitre(), livre.getPrix());
         panier.ajouter(livreAcheter);
-        gestPanier.setPanier(session, panier);
+        GestPanier.setPanier(session, panier);
         return "redirect:/listeLivres";
     }
 

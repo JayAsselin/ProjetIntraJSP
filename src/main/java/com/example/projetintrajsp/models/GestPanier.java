@@ -6,11 +6,12 @@ public class GestPanier {
 
     public static Panier getPanier(HttpSession session) {
         Panier panier;
-            if(session.getAttribute("panier") != null) {
+        if(session.getAttribute("panier") != null) {
                 panier = (Panier) session.getAttribute("panier");
             }
             else {
                 panier = new Panier();
+                session.setAttribute("panier", panier);
             }
             return panier;
     }

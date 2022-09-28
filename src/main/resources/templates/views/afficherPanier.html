@@ -4,6 +4,7 @@
 
 <div layout:fragment="content">
     <h1 class="text-center mb-5 mt-5">Votre panier</h1>
+    <h2 class="text-center" th:if="${panier.liste.size() eq 0}">Votre panier est vide!</h2>
     <table class="table table-responsive text-center">
         <thead>
         <tr>
@@ -14,20 +15,21 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr th:each="livre : ${session.panier.liste}">
+        <tr th:each="livre : ${panier.liste}">
             <td th:text="${livre.isbn}"></td>
             <td th:text="${livre.titre}"></td>
-            <td th:text="${livre.prix}"></td>
-            <td><a th:href="@{/panier/supprimer/{isbn}(isbn=${livre.isbn})}">
+            <td><span th:text="${livre.prix}"></span>$</td>
+            <td><a th:href="@{/panier/supprimer/{isbn}(isbn=${livre.isbn})}"
+                   onclick="return confirm('Voulez-vous vraiment supprimer cette item?')">
                 <span class="bi bi-trash h3"></span>
             </a></td>
         </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-evenly">
-        <a href="/paiement" th:unless="${session.panier.liste.size() eq 0}">Paiement</a>
-        <a th:href="${session.panier.vider()}" th:unless="${session.panier.liste.size() eq 0}">Annuler</a>
-        <a href="/listeLivres">Retourner a la liste</a>
+        <a class="lien" href="/paiement" th:unless="${panier.liste.size() eq 0}">Paiement</a>
+        <a href="/panier/vider" class="lien" th:unless="${panier.liste.size() eq 0}">Annuler</a>
+        <a class="lien" href="/listeLivres">Retourner a la liste</a>
     </div>
 </div>
 </html>

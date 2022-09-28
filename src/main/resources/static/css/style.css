@@ -39,3 +39,15 @@ div>img{
 .bi-trash{
     color: firebrick;
 }
+.lien{
+    text-decoration: none;
+    color: #674218;
+}
+.lien:hover{
+    color: #674218;
+}
+.formErrors{
+    color: darkred;
+    font-weight: bold;
+    font-style: italic;
+}

@@ -3,6 +3,7 @@ package com.example.projetintrajsp.controllers;
 import com.example.projetintrajsp.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,23 +17,29 @@ import javax.validation.Valid;
 public class PanierController {
 
     private static LibrairieDataContext dataContext;
-    private static GestPanier gestPanier;
+    private Panier panier;
 
     public PanierController() {
         dataContext = new LibrairieDataContext();
-        gestPanier = new GestPanier();
     }
 
     @GetMapping("/panier")
-    public ModelAndView afficherPanier(){
-        return new ModelAndView("views/afficherPanier");
+    public ModelAndView afficherPanier(HttpSession session){
+        return new ModelAndView("views/afficherPanier", "panier", GestPanier.getPanier(session));
     }
 
     @GetMapping("/panier/supprimer/{isbn}")
     public String supprimerLivres(HttpSession session, @PathVariable String isbn) {
-        Panier panier = gestPanier.getPanier(session);
+        panier = GestPanier.getPanier(session);
         panier.supprimer(isbn);
-        this.gestPanier.setPanier(session, panier);
+        GestPanier.setPanier(session, panier);
+        return "redirect:/panier";
+    }
+
+    @GetMapping("/panier/vider")
+    public String viderPanier(HttpSession session){
+        panier = GestPanier.getPanier(session);
+        panier.vider();
         return "redirect:/panier";
     }
 
@@ -42,17 +49,29 @@ public class PanierController {
         return new ModelAndView("views/paiement");
     }
 
-    /**
-     * Pas trop sur comment faire l'ajout du detailFacture correctement...
-     * @param facture
-     * @param detailFacture
-     * @return
-     */
     @PostMapping("/paiement")
-    public String paiement(@Valid @ModelAttribute Facture facture,
-                           @ModelAttribute DetailFacture detailFacture){
-        this.dataContext.ajouterFacture(facture);
-        this.dataContext.ajouterDetailFacture(detailFacture);
+    public String paiement(@Valid @ModelAttribute Facture facture, BindingResult result, HttpSession session){
+        if (result.hasErrors()){
+            return "views/paiement";
+        }
+        panier = GestPanier.getPanier(session);
+        facture.setNumFacture(facture.getNumFacture());
+        facture.setNomClient(facture.getNomClient());
+        facture.setAdresse(facture.getAdresse());
+        facture.setTelephone(facture.getTelephone());
+        facture.setEmail(facture.getEmail());
+        facture.setMontantht(panier.getTotalCost());
+        facture.setMttaxe(facture.getMontantht() * 0.15);
+        facture.setMttotal(facture.getMontantht() + facture.getMttaxe());
+        dataContext.ajouterFacture(facture);
+
+        DetailFacture detail = new DetailFacture();
+        for (LivreAchete livre : panier.getListe()){
+            detail.setNumFacture(facture.getNumFacture());
+            detail.setIsbn(livre.getIsbn());
+            detail.setPrix(facture.getMttotal());
+        }
+        dataContext.ajouterDetailFacture(detail);
         return "views/confirmation";
     }
 }

@@ -77,6 +77,8 @@ public class LibrairieDataContext {
     }
 
     public void ajouterFacture(Facture facture) {
+        int numFacture = getNextNumFacture();
+        facture.setNumFacture(numFacture);
         listeFactures.add(facture);
     }
 

@@ -1,10 +1,11 @@
 package com.example.projetintrajsp.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Panier {
-    private List<LivreAchete> liste;
+    private final List<LivreAchete> liste;
 
     public Panier() {
         this.liste = new ArrayList<LivreAchete>();
@@ -27,6 +28,10 @@ public class Panier {
     }
 
     public boolean isPresent(String isbn) {
-        return liste.contains(isbn);
+        return liste.stream().anyMatch(i->i.getIsbn().equals(isbn));
+    }
+
+    public double getTotalCost() {
+       return liste.stream().mapToDouble(LivreAchete::getPrix).sum();
     }
 }
