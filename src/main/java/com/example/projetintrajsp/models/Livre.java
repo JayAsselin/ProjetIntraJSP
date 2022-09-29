@@ -22,10 +22,8 @@ public class Livre {
     private double prix;
     @Min(value = 1, message = "La quantite doit etre minimum 1.")
     private int quantite;
-    @Pattern(regexp="^(\\w-\\s:/\\.)+$", message = "L'adresse url de la photo doit etre valide.")
     private String photo;
-    @Pattern(regexp = "^[A-zéÉèÈ\\d\\-\\s]+$", message = "Vous devez entrer une description du" +
-            " livre.")
+    @NotEmpty(message = "Vous devez entrer une description du livre.")
     private String resume;
 
     public Livre(String isbn, String auteur, String titre, double prix, int quantite,

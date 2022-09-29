@@ -43,9 +43,7 @@
             </div>
             <div class="col-12">
                 <label for="photo" class="form-label">Photo</label>
-                <input type="text" class="form-control" id="photo" th:field="*{photo}">
-                <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"
-                      class="formErrors"></span>
+                <input type="text" class="form-control" id="photo" value="book.jpg" readonly>
             </div>
             <div class="col-12">
                 <label for="description" class="form-label">Description</label>

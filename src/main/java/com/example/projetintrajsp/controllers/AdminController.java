@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -100,6 +101,13 @@ public class AdminController {
         if (result.hasErrors()) {
             return new ModelAndView("views/ajouterLivre");
         }
+        livre.setIsbn(HtmlUtils.htmlEscape(livre.getIsbn()));
+        livre.setAuteur(HtmlUtils.htmlEscape(livre.getAuteur()));
+        livre.setTitre(HtmlUtils.htmlEscape(livre.getTitre()));
+        livre.setPrix(livre.getPrix());
+        livre.setQuantite(livre.getQuantite());
+        livre.setPhoto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv6ud_QTy0wevtfelvv8Te8bNEieBDVVv2tA&usqp=CAU");
+        livre.setResume(HtmlUtils.htmlEscape(livre.getResume()));
         dataContext.ajouterLivre(livre);
         return new ModelAndView("redirect:/adminPanel");
     }

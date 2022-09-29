@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -88,10 +89,10 @@ public class PanierController {
         panier = GestPanier.getPanier(session);
 
         facture.setNumFacture(facture.getNumFacture());
-        facture.setNomClient(facture.getNomClient());
-        facture.setAdresse(facture.getAdresse());
-        facture.setTelephone(facture.getTelephone());
-        facture.setEmail(facture.getEmail());
+        facture.setNomClient(HtmlUtils.htmlEscape(facture.getNomClient()));
+        facture.setAdresse(HtmlUtils.htmlEscape(facture.getAdresse()));
+        facture.setTelephone(HtmlUtils.htmlEscape(facture.getTelephone()));
+        facture.setEmail(HtmlUtils.htmlEscape(facture.getEmail()));
         facture.setMontantht(panier.getTotalCost());
         facture.setMttaxe(facture.getMontantht() * 0.15);
         facture.setMttotal(facture.getMontantht() + facture.getMttaxe());
