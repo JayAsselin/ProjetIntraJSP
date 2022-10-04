@@ -3,11 +3,20 @@ package com.example.projetintrajsp.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
+@Entity
 public class Facture {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int numFacture;
     @Pattern(regexp = "^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$", message = "Le numéro de " +
             "telephone doit etre sous le format (XXX) XXX-XXXX")
@@ -24,9 +33,8 @@ public class Facture {
     private double mttaxe;
     private double mttotal;
 
-    public Facture(int numFacture, String telephone, String nomClient, String adresse,
+    public Facture(String telephone, String nomClient, String adresse,
                    String email, double montantht, double mttaxe, double mttotal) {
-        this.numFacture = numFacture;
         this.telephone = telephone;
         this.nomClient = nomClient;
         this.adresse = adresse;

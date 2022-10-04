@@ -3,12 +3,20 @@ package com.example.projetintrajsp.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Getter
 @Setter
+@Entity
 public class Livre {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Pattern(regexp="^\\d{13}$", message = "L'isbn d'un livre doit etre 13 chiffres")
     private String isbn;
     @Pattern(regexp="^[A-zÉéèÈ\\-\\s]{2,40}$",message = "Le nom d'auteur doit contenir entre 2 et" +

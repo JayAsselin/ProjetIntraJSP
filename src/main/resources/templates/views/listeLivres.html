@@ -7,6 +7,7 @@
         <h1>Liste de livres</h1>
         <a class="lien" href="/panier">Voir mon panier</a>
         <p>Nombre de livre au panier: <span th:text="${session.panier.liste.size()}"></span></p>
+        <p th:if="${#lists.size(listeLivres) eq 0}"><strong>La liste est vide</strong></p>
     </div>
 <table class="table table-responsive text-center">
     <thead>

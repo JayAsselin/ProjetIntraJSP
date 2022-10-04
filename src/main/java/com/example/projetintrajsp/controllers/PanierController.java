@@ -1,6 +1,7 @@
 package com.example.projetintrajsp.controllers;
 
 import com.example.projetintrajsp.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,13 +17,9 @@ import javax.validation.Valid;
 
 @Controller
 public class PanierController {
-
-    private static LibrairieDataContext dataContext;
+    @Autowired
+    private LibrairieDataContext dataContext;
     private Panier panier;
-
-    public PanierController() {
-        dataContext = new LibrairieDataContext();
-    }
 
     /**
      * Affiche la vue afficherPanier
@@ -88,7 +85,6 @@ public class PanierController {
 
         panier = GestPanier.getPanier(session);
 
-        facture.setNumFacture(facture.getNumFacture());
         facture.setNomClient(HtmlUtils.htmlEscape(facture.getNomClient()));
         facture.setAdresse(HtmlUtils.htmlEscape(facture.getAdresse()));
         facture.setTelephone(HtmlUtils.htmlEscape(facture.getTelephone()));

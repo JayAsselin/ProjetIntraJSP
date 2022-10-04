@@ -1,8 +1,8 @@
 package com.example.projetintrajsp.controllers;
 
 import com.example.projetintrajsp.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class AchatController {
-
-    private static LibrairieDataContext dataContext;
+    @Autowired
+    private LibrairieDataContext dataContext;
     private Panier panier;
 
-    public AchatController() {
-        dataContext = new LibrairieDataContext();
-    }
+//    public AchatController() {
+//        dataContext = new LibrairieDataContext();
+//    }
 
     /**
      * Affiche la liste de livre a acheter

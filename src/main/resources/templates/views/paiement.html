@@ -7,10 +7,6 @@
 <div class="d-flex justify-content-center">
     <form class="row g-3 w-50" th:action="@{/paiement}"
           th:object="${facture}" method="post">
-        <div class="col-12">
-            <label for="numFacture" class="form-label" hidden>Numero facture</label>
-            <input type="text" class="form-control" id="numFacture" th:field="*{numFacture}" hidden>
-        </div>
         <div class="col-md-6">
             <label for="nom" class="form-label">Nom complet</label>
             <input type="text" class="form-control" id="nom" th:field="*{nomClient}">
