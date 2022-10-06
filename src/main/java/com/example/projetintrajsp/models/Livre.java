@@ -19,11 +19,15 @@ public class Livre {
     private int id;
     @Pattern(regexp="^\\d{13}$", message = "L'isbn d'un livre doit etre 13 chiffres")
     private String isbn;
-    @Pattern(regexp="^[A-zÉéèÈ\\-\\s]{2,40}$",message = "Le nom d'auteur doit contenir entre 2 et" +
-            " 40 charactères alphabétique.")
+
+//    @Pattern(regexp="^[A-zÉéèÈ\\-\\s]{2,40}$",message = "Le nom d'auteur doit contenir entre 2 et" +
+//            " 40 charactères alphabétique.")
+    @NotEmpty(message = "Vous devez entrer un nom d'auteur.")
     private String auteur;
-    @Pattern(regexp="^[A-zéÉèÈ\\d\\-\\s]{5,40}$", message ="Le titre doit contenir entre 5 et 40 " +
-            "charactères alphanumériques.")
+
+//    @Pattern(regexp="^[A-zéÉèÈ\\d\\-\\s]{5,40}$", message ="Le titre doit contenir entre 5 et 40 " +
+//            "charactères alphanumériques.")
+    @NotEmpty(message = "Vous devez entrer un titre.")
     private String titre;
     @DecimalMin(value = "0.10", message = "Le montant d'un livre doit etre minimum 0.10$.")
     @DecimalMax(value = "100.00", message = "Le montant d'un livre doit etre maximum 100.00$.")
