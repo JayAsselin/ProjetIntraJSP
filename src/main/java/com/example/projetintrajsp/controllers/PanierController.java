@@ -2,6 +2,7 @@ package com.example.projetintrajsp.controllers;
 
 import com.example.projetintrajsp.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
@@ -38,11 +40,12 @@ public class PanierController {
      * @return redirection vers afficherPanier
      */
     @GetMapping("/panier/supprimer/{isbn}")
-    public String supprimerLivres(HttpSession session, @PathVariable String isbn) {
+    @ResponseBody
+    public ResponseEntity<String> supprimerLivres(HttpSession session, @PathVariable String isbn) {
         panier = GestPanier.getPanier(session);
         panier.supprimer(isbn);
         GestPanier.setPanier(session, panier);
-        return "redirect:/panier";
+        return ResponseEntity.ok().body("Livre supprimer avec succes!");
     }
 
     /**

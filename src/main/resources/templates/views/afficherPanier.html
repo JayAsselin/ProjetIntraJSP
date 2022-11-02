@@ -15,15 +15,14 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr th:each="livre : ${panier.liste}">
-            <td th:text="${livre.isbn}"></td>
-            <td th:text="${livre.titre}"></td>
-            <td><span th:text="${livre.prix}"></span>$</td>
-            <td><a th:href="@{/panier/supprimer/{isbn}(isbn=${livre.isbn})}"
-                   onclick="return confirm('Voulez-vous vraiment supprimer cette item?')">
-                <span class="bi bi-trash h3"></span>
-            </a></td>
-        </tr>
+                <tr th:id="${livre.isbn}" th:each="livre : ${panier.liste}">
+                    <td th:text="${livre.isbn}"></td>
+                    <td th:id="${livre.titre}" th:text="${livre.titre}"></td>
+                    <td><span th:text="${livre.prix}"></span>$</td>
+                    <td><a th:onclick="fnDelete([[${livre.isbn}]], [[${livre.titre}]])">
+                        <span class="bi bi-trash h3"></span>
+                    </a></td>
+                </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-evenly">

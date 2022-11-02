@@ -6,7 +6,7 @@
     <div class="text-center mb-5 mt-5">
         <h1>Liste de livres</h1>
         <a class="lien" href="/panier">Voir mon panier</a>
-        <p>Nombre de livre au panier: <span th:text="${session.panier.liste.size()}"></span></p>
+        <p>Nombre de livre au panier: <span id="items" th:text="${session.panier.liste.size()}">0</span></p>
         <p th:if="${#lists.size(listeLivres) eq 0}"><strong>La liste est vide</strong></p>
     </div>
 <table class="table table-responsive text-center">
@@ -28,8 +28,8 @@
         <td><span th:text="${livre.prix}"></span>$</td>
         <td><a th:href="@{/listeLivres/info/{isbn}(isbn=${livre.isbn})}">
             <span class="bi bi-file-text h3"></span></a></td>
-        <td><a
-                th:href="@{/listeLivres/acheter/{isbn}(isbn=${livre.isbn})}"
+        <td><a th:id="${livre.isbn}"
+                th:onclick="fnBuy([[${livre.isbn}]])"
                 th:unless="${session.panier.isPresent(livre.isbn)}"><span
                 class="bi bi-cart-plus h3"></span></a>
         </td>

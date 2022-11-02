@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -37,13 +38,14 @@ public class AchatController {
      * @return redirection ver listeLivres.html
      */
     @GetMapping("/listeLivres/acheter/{isbn}")
-    public String acheterLivres(@PathVariable String isbn, HttpSession session){
+    @ResponseBody
+    public String acheterLivres(@PathVariable String isbn, HttpSession session) {
         panier = GestPanier.getPanier(session);
         Livre livre = dataContext.findLivre(isbn);
         LivreAchete livreAcheter = new LivreAchete(livre.getIsbn(), livre.getTitre(), livre.getPrix());
         panier.ajouter(livreAcheter);
         GestPanier.setPanier(session, panier);
-        return "redirect:/listeLivres";
+        return ""+panier.getListe().size()+"" ;
     }
 
     /**
